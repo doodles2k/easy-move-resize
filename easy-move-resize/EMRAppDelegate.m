@@ -145,20 +145,16 @@ CGEventRef myCGEventCallback(CGEventTapProxy __unused proxy, CGEventType type, C
 
         NSSize wndSize = cSize;
 
-        if (clickPoint.x < wndSize.width/3) {
+        if (clickPoint.x < wndSize.width/2) {
             resizeSection.xResizeDirection = left;
-        } else if (clickPoint.x > 2*wndSize.width/3) {
-            resizeSection.xResizeDirection = right;
         } else {
-            resizeSection.xResizeDirection = noX;
+            resizeSection.xResizeDirection = right;
         }
 
-        if (clickPoint.y < wndSize.height/3) {
+        if (clickPoint.y < wndSize.height/2) {
             resizeSection.yResizeDirection = bottom;
-        } else  if (clickPoint.y > 2*wndSize.height/3) {
-            resizeSection.yResizeDirection = top;
         } else {
-            resizeSection.yResizeDirection = noY;
+            resizeSection.yResizeDirection = top;
         }
 
         [moveResize setWndSize:wndSize];
@@ -183,9 +179,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy __unused proxy, CGEventType type, C
                 wndSize.width -= deltaX;
                 cTopLeft.x += deltaX;
                 break;
-            case noX:
-                // nothing to do
-                break;
             default:
                 [NSException raise:@"Unknown xResizeSection" format:@"No case for %d", resizeSection.xResizeDirection];
         }
@@ -197,9 +190,6 @@ CGEventRef myCGEventCallback(CGEventTapProxy __unused proxy, CGEventType type, C
             case bottom:
                 wndSize.height -= deltaY;
                 cTopLeft.y += deltaY;
-                break;
-            case noY:
-                // nothing to do
                 break;
             default:
                 [NSException raise:@"Unknown yResizeSection" format:@"No case for %d", resizeSection.yResizeDirection];

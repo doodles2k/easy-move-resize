@@ -3,13 +3,11 @@
 enum ResizeDirectionX {
     right,
     left,
-    noX
 };
 
 enum ResizeSectionY {
     top,
     bottom,
-    noY
 };
 
 struct ResizeSection {
